@@ -1,7 +1,7 @@
 #ifndef INTERFACE_HPP
 #define INTEFACE_HPP
 class BaseMatrix{
-    private: 
+    protected: 
     double** Matrix;
     const int rows, columns;
     public:
@@ -16,6 +16,8 @@ class BaseMatrix{
     int ChangeMatrix();
 };
 class SquareMatrix: public BaseMatrix{
+    protected: 
+    int size; //will be equal to either rows or columns
     public:
     void Inverse(); // make the thing equal to matrix in function itself.
     bool Issingular();
