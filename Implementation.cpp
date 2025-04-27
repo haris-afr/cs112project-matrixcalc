@@ -59,3 +59,64 @@ double SquareMatrix:: Determinant(){
 
 }
 
+void BaseMatrix::displayRow(int rowNo){
+	for (int i = 0; i < columns; i++){
+		cout << Matrix[rowNo][i] << " ";
+	}
+	cout << endl;
+}
+void BaseMatrix::displayCol(int colNo){
+	for (int i = 0; i < rows; i++){
+		cout << Matrix[i][colNo] << endl;
+	}
+	cout << endl;
+}
+
+void BaseMatrix::setRow(int rowNo, double* newRow){
+	for (int i = 0; i < columns; i++){
+		Matrix[rowNo][i] = newRow[i];
+	}
+}
+void BaseMatrix::setCol(int colNo, double* newCol){
+	for (int i = 0; i < rows; i++){
+		Matrix[i][colNo] = newCol[i];
+	}
+}
+void BaseMatrix::getRow(int rowNo, double* rowArray){
+	for (int i = 0; i < columns; i++){
+		rowArray[i] = Matrix[rowNo][i];
+	}
+}
+void BaseMatrix::getCol(int colNo, double* ColArray){
+	for (int i = 0; i < rows; i++){
+		ColArray[i] = Matrix[i][colNo];
+	}
+}
+
+void BaseMatrix::swapRows(int row1, int row2){
+		double *tempRow = new double [columns];
+		getRow(row1, tempRow);
+		setRow(row1, Matrix[row2]);
+		setRow(row2, tempRow);
+		delete tempRow;
+}
+
+void BaseMatrix::RowEchelon(){
+	int pivotRow;
+	for (int i = 0; i < rows; i++){
+		if(Matrix[i][0] != 0){
+			pivotRow = i;
+			break;
+		}
+	}
+	if (pivotRow != 0){
+		swapRows(0, pivotRow);
+	}
+}
+void BaseMatrix::ReducedRowEchelon(){
+	cout << "hi";
+}
+int BaseMatrix::Rank(){
+	cout << "hi";	
+	return 0;
+}

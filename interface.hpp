@@ -6,16 +6,26 @@ class BaseMatrix{
     const int rows, columns;
     public:
     BaseMatrix(int x, int y);
-    ~BaseMatrix();
+    //~BaseMatrix(); temporarily comment this out cause it creates problems until it is fully implemented
     BaseMatrix operator+(const BaseMatrix& rhs);
     BaseMatrix operator-(const BaseMatrix& rhs);
     BaseMatrix operator*(const BaseMatrix& rhs);
     void Transpose(); // make the thing equal to matrix in the function itself.
-    int RowEchelon();
+    void RowEchelon();
+    void ReducedRowEchelon();
     int Rank();
-    int Display();
+    void Display();
     int ChangeMatrix();
+    
+    void displayRow(int rowNo);
+    void displayCol(int colNo);
+    void setRow(int rowNo, double* newRow);
+    void setCol(int colNo, double* newCol);
+    void getRow(int rowNo, double*);
+    void getCol(int colNo, double*);
+    void swapRows(int row1, int row2);
 };
+
 class SquareMatrix: public BaseMatrix{
     protected: 
     int size; //will be equal to either rows or columns
