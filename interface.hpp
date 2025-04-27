@@ -1,6 +1,9 @@
 #ifndef INTERFACE_HPP
 #define INTEFACE_HPP
 class BaseMatrix{
+    private: 
+    double** Matrix;
+    const int rows, columns;
     public:
     BaseMatrix(int x, int y);
     int operator+(const BaseMatrix& rhs);
