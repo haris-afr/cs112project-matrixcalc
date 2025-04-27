@@ -1,7 +1,7 @@
 #ifndef INTERFACE_HPP
 #define INTEFACE_HPP
 class BaseMatrix{
-    BaseMatrix(double x, double y);
+    BaseMatrix(int x, int y);
     int operator+(const BaseMatrix& rhs);
     int operator-(const BaseMatrix& rhs);
     int operator*(const BaseMatrix& rhs);
