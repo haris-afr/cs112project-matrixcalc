@@ -44,7 +44,7 @@ double SquareMatrix:: Determinant(){
             }
             det *=-1;
         }
-        if(temp.Matrix[i][i]==0.0){return 0;};// if top row is 0 then it is singular.
+        if(temp.Matrix[i][i]==0.0){return 0;}// if top row is 0 then it is singular.
 
         for(int j=i+1; j<size; j++){ //gaussian elimination.
             double factor= temp.Matrix[j][i]/temp.Matrix[i][i];
