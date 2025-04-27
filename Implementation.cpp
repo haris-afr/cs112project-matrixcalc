@@ -2,18 +2,27 @@
 #include "interface.hpp"
 
 using namespace std;
-BaseMatrix::BaseMatrix(int rows, int column){
-    double** Matrix = new double*[rows];
-    for(int i =0; i<column; i++){
-        Matrix[i]= new double[column];
+BaseMatrix::BaseMatrix(int x, int y): rows(x), columns(y) {
+    Matrix = new double*[x];
+    for(int i =0; i<y; i++){
+        Matrix[i]= new double[y];
     }
-    for(int i = 0; i<rows; i++){
-        for(int j=0; j<column; j++){
+    for(int i = 0; i<x; i++){
+        for(int j=0; j<y; j++){
             double temp;
-            cout<<"Please enter "<<i+1<<"'"<<j+1<<"th element: ";
+            cout<<"Please enter "<<i<<"'"<<j<<"th element: ";
             cin>>temp;
             Matrix[i][j]= temp;
             
         }
     }
 };
+void BaseMatrix::Display(){
+    for(int i= 0; i<rows;i++){
+        for(int j=0; j<columns; j++){
+            cout<<Matrix[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+};
+
