@@ -10,7 +10,7 @@ BaseMatrix::BaseMatrix(int rows, int column){
     for(int i = 0; i<rows; i++){
         for(int j=0; j<column; j++){
             double temp;
-            cout<<"Please enter "<<i<<"'"<<j<<"th element: ";
+            cout<<"Please enter "<<i+1<<"'"<<j+1<<"th element: ";
             cin>>temp;
             Matrix[i][j]= temp;
             
