@@ -2,7 +2,7 @@
 #include "interface.hpp"
 
 using namespace std;
-BaseMatrix::BaseMatrix(double rows, double column){
+BaseMatrix::BaseMatrix(int rows, int column){
     double** Matrix = new double*[rows];
     for(int i =0; i<column; i++){
         Matrix[i]= new double[column];
