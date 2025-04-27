@@ -6,19 +6,20 @@ class BaseMatrix{
     const int rows, columns;
     public:
     BaseMatrix(int x, int y);
-    int operator+(const BaseMatrix& rhs);
-    int operator-(const BaseMatrix& rhs);
-    int operator*(const BaseMatrix& rhs);
-    int Transpose();
-    bool Issingular();
-    int Determinant();
+    BaseMatrix operator+(const BaseMatrix& rhs);
+    BaseMatrix operator-(const BaseMatrix& rhs);
+    BaseMatrix operator*(const BaseMatrix& rhs);
+    void Transpose(); // make the thing equal to matrix in the function itself.
     int RowEchelon();
     int Rank();
     int Display();
     int ChangeMatrix();
 };
 class SquareMatrix: public BaseMatrix{
-    int Inverse();
+    public:
+    void Inverse(); // make the thing equal to matrix in function itself.
+    bool Issingular();
+    int Determinant();
 };
 class IdentityMatrix: public SquareMatrix{
 
