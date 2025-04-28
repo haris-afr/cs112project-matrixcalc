@@ -145,10 +145,12 @@ BaseMatrix& BaseMatrix:: operator=(const BaseMatrix& rhs){
     return *this;
 }
 
-void SquareMatrix:: Transpose() override{
+void SquareMatrix:: Transpose() {
     for (int i = 0; i < rows; i++) {
         for (int j = i; j < columns; j++) {
-        std::swap(Matrix[i][j], Matrix[j][i]);
+            int temp = Matrix[i][j];
+            Matrix[i][j]= Matrix[j][i];
+            Matrix[j][i]= temp;
         }
     }
 }
