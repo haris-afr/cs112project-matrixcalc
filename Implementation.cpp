@@ -1,4 +1,6 @@
 #include<iostream>
+#include<algorithm>
+#include<cmath>
 #include "interface.hpp"
 
 using namespace std;
@@ -40,7 +42,7 @@ double SquareMatrix:: Determinant(){
         }
         if(pivot !=i){ //swap temp[pivot][i] with temp[i][j]
             for(int j=0; j<size; j++){
-                swap(temp.Matrix[i][j], temp.Matrix[pivot][j]);
+                std::swap(temp.Matrix[i][j], temp.Matrix[pivot][j]);
             }
             det *=-1;
         }
@@ -116,7 +118,37 @@ void BaseMatrix::RowEchelon(){
 void BaseMatrix::ReducedRowEchelon(){
 	cout << "hi";
 }
+
 int BaseMatrix::Rank(){
 	cout << "hi";	
 	return 0;
+}
+
+BaseMatrix& BaseMatrix:: operator=(const BaseMatrix& rhs){
+    for(int i =0; i<rows; i++){
+        delete[] Matrix[i];
+    }
+    delete[] Matrix;
+
+    rows= rhs.rows;
+    columns = rhs.columns;
+    Matrix = new double*[rows];
+    for(int i =0; i<rows; i++){
+        Matrix[i]= new double[columns];
+    }
+    for(int i=0; i<rows; i++){
+        for(int j=0; j<columns; j++){
+            Matrix[i][j] = rhs.Matrix[i][j];
+        }
+    }
+    
+    return *this;
+}
+
+void SquareMatrix:: Transpose() override{
+    for (int i = 0; i < rows; i++) {
+        for (int j = i; j < columns; j++) {
+        std::swap(Matrix[i][j], Matrix[j][i]);
+        }
+    }
 }
