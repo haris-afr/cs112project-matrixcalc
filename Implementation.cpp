@@ -19,6 +19,7 @@ BaseMatrix::BaseMatrix(int x, int y): rows(x), columns(y) {
         }
     }
 };
+
 void BaseMatrix::Display(){
     for(int i= 0; i<rows;i++){
         for(int j=0; j<columns; j++){
@@ -103,17 +104,37 @@ void BaseMatrix::swapRows(int row1, int row2){
 		delete tempRow;
 }
 
+void BaseMatrix::multiplyRow(int row, double coefficient){
+	for (int i = 0; i < columns; i++){
+		Matrix[row][i] *= coefficient;
+	}
+}
+
 void BaseMatrix::RowEchelon(){
-	int pivotRow;
+	//for(int row = 0; row < columns;row++)
+	int pivotRow, pivotCol = 0;
+	double pivot = 0;
+	bool zeroMatrix = 0;
 	for (int i = 0; i < rows; i++){
-		if(Matrix[i][0] != 0){
+		if(Matrix[i][pivotCol] != 0){
 			pivotRow = i;
 			break;
+		}
+		if (i == rows - 1){
+			i = 0;
+			pivotCol++;
+		}
+		if (pivotCol == columns - 1 && i == rows - 1){
+			zeroMatrix = 1;
+			return;
 		}
 	}
 	if (pivotRow != 0){
 		swapRows(0, pivotRow);
 	}
+	pivot = Matrix[0][pivotCol];
+	multiplyRow(0, 1/pivot);
+	
 }
 void BaseMatrix::ReducedRowEchelon(){
 	cout << "hi";

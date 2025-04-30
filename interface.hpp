@@ -25,6 +25,7 @@ class BaseMatrix{
     void getRow(int rowNo, double*);
     void getCol(int colNo, double*);
     void swapRows(int row1, int row2);
+    void multiplyRow(int row, double coefficient);
 };
 
 class SquareMatrix: public BaseMatrix{
