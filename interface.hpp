@@ -36,7 +36,7 @@ class SquareMatrix: public BaseMatrix{
     SquareMatrix(int a, int b);
     void Inverse(); // make the thing equal to matrix in function itself.
     double Determinant();
-    //void Transpose() override;
+    void Transpose();
 };
 class IdentityMatrix: public SquareMatrix{
 
