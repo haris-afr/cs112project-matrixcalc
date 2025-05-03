@@ -34,7 +34,7 @@ class SquareMatrix: public BaseMatrix{
     int size; //will be equal to either rows or columns
     public:
     SquareMatrix(int a, int b);
-    void Inverse(); // make the thing equal to matrix in function itself.
+    //void Inverse(); // make the thing equal to matrix in function itself.
     double Determinant();
     void Transpose();
 };
