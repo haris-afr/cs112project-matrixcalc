@@ -3,7 +3,7 @@
 class BaseMatrix{
     protected: 
     double** Matrix;
-    const int rows, columns;
+    int rows, columns;
     public:
     BaseMatrix(int x, int y);
     //~BaseMatrix(); temporarily comment this out cause it creates problems until it is fully implemented
@@ -11,7 +11,7 @@ class BaseMatrix{
     BaseMatrix& operator+(const BaseMatrix& rhs);
     BaseMatrix& operator-(const BaseMatrix& rhs);
     BaseMatrix& operator*(const BaseMatrix& rhs);
-    virtual void Transpose(); // make the thing equal to matrix in the function itself.
+    //virtual void Transpose(); // make the thing equal to matrix in the function itself.
     void RowEchelon();
     void ReducedRowEchelon();
     int Rank();
@@ -26,6 +26,7 @@ class BaseMatrix{
     void getCol(int colNo, double*);
     void swapRows(int row1, int row2);
     void multiplyRow(int row, double coefficient);
+    void rowMinusRow(int row1, int row2);
 };
 
 class SquareMatrix: public BaseMatrix{
@@ -35,7 +36,7 @@ class SquareMatrix: public BaseMatrix{
     SquareMatrix(int a, int b);
     void Inverse(); // make the thing equal to matrix in function itself.
     double Determinant();
-    void Transpose() override;
+    //void Transpose() override;
 };
 class IdentityMatrix: public SquareMatrix{
 

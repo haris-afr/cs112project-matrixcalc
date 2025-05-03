@@ -110,8 +110,13 @@ void BaseMatrix::multiplyRow(int row, double coefficient){
 	}
 }
 
+void BaseMatrix::rowMinusRow(int row1, int row2){
+	for (int i = 0; i < columns;i++){
+		Matrix[row1][i] -= Matrix[row2][i];
+	}
+}
+
 void BaseMatrix::RowEchelon(){
-	//for(int row = 0; row < columns;row++)
 	int pivotRow, pivotCol = 0;
 	double pivot = 0;
 	bool zeroMatrix = 0;
@@ -131,9 +136,17 @@ void BaseMatrix::RowEchelon(){
 	}
 	if (pivotRow != 0){
 		swapRows(0, pivotRow);
+		pivotRow = 0;
 	}
 	pivot = Matrix[0][pivotCol];
 	multiplyRow(0, 1/pivot);
+
+	for (int row = pivotRow + 1; row < rows; row++){
+		for(int count = Matrix[row][pivotCol]; count > 0; count--){
+			cout << row << "     " << pivotRow << endl;
+			rowMinusRow(row, pivotRow);
+		}	
+	}
 	
 }
 void BaseMatrix::ReducedRowEchelon(){
@@ -144,14 +157,14 @@ int BaseMatrix::Rank(){
 	cout << "hi";	
 	return 0;
 }
-
+/*
 BaseMatrix& BaseMatrix:: operator=(const BaseMatrix& rhs){
     for(int i =0; i<rows; i++){
         delete[] Matrix[i];
     }
     delete[] Matrix;
 
-    rows= rhs.rows;
+    rows = rhs.rows;
     columns = rhs.columns;
     Matrix = new double*[rows];
     for(int i =0; i<rows; i++){
@@ -175,3 +188,4 @@ void SquareMatrix:: Transpose() {
         }
     }
 }
+*/
