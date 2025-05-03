@@ -157,7 +157,7 @@ int BaseMatrix::Rank(){
 	cout << "hi";	
 	return 0;
 }
-/*
+
 BaseMatrix& BaseMatrix:: operator=(const BaseMatrix& rhs){
     for(int i =0; i<rows; i++){
         delete[] Matrix[i];
@@ -188,4 +188,3 @@ void SquareMatrix:: Transpose() {
         }
     }
 }
-*/
