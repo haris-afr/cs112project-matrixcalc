@@ -4,7 +4,7 @@ using namespace std;
 
 
 int main(){
-	BaseMatrix test(3, 3);
+	BaseMatrix test(3, 2);
 	test.Display();
 	test.RowEchelon();	
 	test.Display();

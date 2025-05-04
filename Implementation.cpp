@@ -6,7 +6,7 @@
 using namespace std;
 BaseMatrix::BaseMatrix(int x, int y): rows(x), columns(y) {
     Matrix = new double*[x];
-    for(int i =0; i<y; i++){
+    for(int i=0; i<x; i++){
         Matrix[i]= new double[y];
     }
     for(int i = 0; i<x; i++){
@@ -15,7 +15,6 @@ BaseMatrix::BaseMatrix(int x, int y): rows(x), columns(y) {
             cout<<"Please enter "<<i<<"'"<<j<<"th element: ";
             cin>>temp;
             Matrix[i][j]= temp;
-            
         }
     }
 };
@@ -128,7 +127,7 @@ void BaseMatrix::rowPlusRow(int row1, int row2, double multiplier){
 }
 
 void BaseMatrix::RowEchelon(){
-	for (int pivotNum = 0; pivotNum < rows; pivotNum++){
+	for (int pivotNum = 0; pivotNum < columns; pivotNum++){
 		int pivotRow, pivotCol = 0;
 		double pivotVal = 0;
 		pivotCol = pivotNum;
