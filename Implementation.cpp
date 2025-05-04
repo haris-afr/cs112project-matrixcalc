@@ -109,45 +109,55 @@ void BaseMatrix::multiplyRow(int row, double coefficient){
 		Matrix[row][i] *= coefficient;
 	}
 }
-
-void BaseMatrix::rowMinusRow(int row1, int row2){
+//
+//void BaseMatrix::rowMinusRow(int row1, int row2){
+//	for (int i = 0; i < columns;i++){
+//		Matrix[row1][i] -= Matrix[row2][i];
+//	}
+//}
+//void BaseMatrix::rowPlusRow(int row1, int row2){
+//	for (int i = 0; i < columns;i++){
+//		Matrix[row1][i] += Matrix[row2][i];
+//	}
+//} 
+///Unneccesary, remove if not used
+void BaseMatrix::rowPlusRow(int row1, int row2, double multiplier){
 	for (int i = 0; i < columns;i++){
-		Matrix[row1][i] -= Matrix[row2][i];
+		Matrix[row1][i] += Matrix[row2][i] * multiplier;
 	}
 }
 
 void BaseMatrix::RowEchelon(){
-	int pivotRow, pivotCol = 0;
-	double pivot = 0;
-	bool zeroMatrix = 0;
-	for (int i = 0; i < rows; i++){
-		if(Matrix[i][pivotCol] != 0){
-			pivotRow = i;
-			break;
+	for (int pivotNum = 0; pivotNum < rows; pivotNum++){
+		int pivotRow, pivotCol = 0;
+		double pivotVal = 0;
+		pivotCol = pivotNum;
+		for (int i = pivotNum; i < rows; i++){
+			if(Matrix[i][pivotCol] != 0){
+				pivotRow = i;
+				break;
+			}
+			if (pivotCol >= columns - 1 && i == rows - 1){
+				return;
+			}
+			if (i == rows - 1){
+				i = 0;
+				pivotCol++;
+			}
 		}
-		if (i == rows - 1){
-			i = 0;
-			pivotCol++;
+		
+		if (pivotRow != pivotNum){
+			swapRows(pivotNum, pivotRow);
+			pivotRow = pivotNum;
 		}
-		if (pivotCol == columns - 1 && i == rows - 1){
-			zeroMatrix = 1;
-			return;
-		}
-	}
-	if (pivotRow != 0){
-		swapRows(0, pivotRow);
-		pivotRow = 0;
-	}
-	pivot = Matrix[0][pivotCol];
-	multiplyRow(0, 1/pivot);
-
-	for (int row = pivotRow + 1; row < rows; row++){
-		for(int count = Matrix[row][pivotCol]; count > 0; count--){
-			cout << row << "     " << pivotRow << endl;
-			rowMinusRow(row, pivotRow);
-		}	
-	}
+		
+		pivotVal = Matrix[pivotRow][pivotCol];
+		multiplyRow(pivotRow, 1/pivotVal);
 	
+		for (int row = pivotRow + 1; row < rows; row++){
+			rowPlusRow(row, pivotRow, -Matrix[row][pivotCol]);
+		}
+	}
 }
 void BaseMatrix::ReducedRowEchelon(){
 	cout << "hi";

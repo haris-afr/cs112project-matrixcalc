@@ -26,7 +26,9 @@ class BaseMatrix{
     void getCol(int colNo, double*);
     void swapRows(int row1, int row2);
     void multiplyRow(int row, double coefficient);
-    void rowMinusRow(int row1, int row2);
+//    void rowMinusRow(int row1, int row2); unneccessary, remove if not used
+//    void rowPlusRow(int row1, int row2);
+    void rowPlusRow(int row1, int row2, double multiplier);
 };
 
 class SquareMatrix: public BaseMatrix{
