@@ -242,4 +242,14 @@ BaseMatrix BaseMatrix::operator*(const BaseMatrix& rhs) const {
     }
     return result;
 
+BaseMatrix BaseMatrix::operator/(double scalar) const {
+    BaseMatrix result(rows, columns);
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            result.Matrix[i][j] = Matrix[i][j] / scalar;
+        }
+    }
+    return result;
+}
+
 
