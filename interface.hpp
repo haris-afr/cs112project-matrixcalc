@@ -5,6 +5,7 @@ class BaseMatrix{
     double** Matrix;
     int rows, columns;
     public:
+    Basematrix();
     BaseMatrix(int x, int y);
     //~BaseMatrix(); temporarily comment this out cause it creates problems until it is fully implemented
     BaseMatrix& operator=(const BaseMatrix& rhs);
@@ -34,10 +35,11 @@ class SquareMatrix: public BaseMatrix{
     protected: 
     int size; //will be equal to either rows or columns
     public:
+    SquareMatrix();
     SquareMatrix(int a, int b);
-    //void Inverse(); // make the thing equal to matrix in function itself.
+    SquareMatrix Inverse(); // make the thing equal to matrix in function itself.
     double Determinant();
-    void Transpose();
+    SquareMatrix Transpose();
 };
 class IdentityMatrix: public SquareMatrix{
 
