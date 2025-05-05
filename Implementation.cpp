@@ -4,6 +4,19 @@
 #include "interface.hpp"
 
 using namespace std;
+BaseMatrix:: BaseMatrix():rows(3), columns(3){// makes a default 3x3 with 1s. can later use assignment operator to change it.
+    Matrix = new double*[3];
+    for(int i =0; i<3; i++){
+        Matrix[i]= new double[3];
+    }
+    for(int i = 0; i<3; i++){
+        for(int j=0; j<3; j++){
+            Matrix[i][j]=1;
+        }
+    }
+}
+SquareMatrix:: SquareMatrix():BaseMatrix(), size(3){}// makes a default 3x3 with 1s
+
 BaseMatrix::BaseMatrix(int x, int y): rows(x), columns(y) {
     Matrix = new double*[x];
     for(int i=0; i<x; i++){
@@ -216,14 +229,18 @@ BaseMatrix& BaseMatrix:: operator=(const BaseMatrix& rhs){
     return *this;
 }
 
-void SquareMatrix:: Transpose() {
+SquareMatrix SquareMatrix:: Transpose() {
+    SquareMatrix result;
+    result = *this;
+
     for (int i = 0; i < rows; i++) {
         for (int j = i; j < columns; j++) {
-            int temp = Matrix[i][j];
-            Matrix[i][j]= Matrix[j][i];
-            Matrix[j][i]= temp;
+            int temp = result.Matrix[i][j];
+            result.Matrix[i][j]= result.Matrix[j][i];
+            result.Matrix[j][i]= temp;
         }
     }
+    return result;
 }
 
 
@@ -319,3 +336,68 @@ bool BaseMatrix::operator==(const BaseMatrix& rhs) const {
     return true;
 }
 
+SquareMatrix SquareMatrix::Inverse() {
+    const double EPSILON = 1e-10; // using this for floating point precision.
+    
+    // Create augmented matrix [Matrix|I]
+    double** augmented = new double*[size];
+    for (int i = 0; i < size; i++) {
+        augmented[i] = new double[2 * size];
+        for (int j = 0; j < size; j++) {
+            augmented[i][j] = Matrix[i][j];
+        }
+        for (int j = size; j < 2 * size; j++) {
+            augmented[i][j] = (i == (j - size)) ? 1.0 : 0.0;
+        }
+    }
+
+    // Performing Gauss Jordan elimination
+    for (int col = 0; col < size; col++) {
+        // Partial pivoting
+        int pivot = col;
+        for (int row = col + 1; row < size; row++) {
+            if (fabs(augmented[row][col]) > fabs(augmented[pivot][col])) {
+                pivot = row;
+            }
+        }
+        
+        if (pivot != col) {
+            for (int k = 0; k < 2 * size; k++) {
+                swap(augmented[col][k], augmented[pivot][k]);
+            }
+        }
+
+        // Checking for singularity
+        if (fabs(augmented[col][col]) < EPSILON) {
+            for (int i = 0; i < size; i++) delete[] augmented[i];
+            delete[] augmented;
+            throw runtime_error("Matrix is singular");
+        }
+
+        // Normalize pivot row
+        double pivot_val = augmented[col][col];
+        for (int k = col; k < 2 * size; k++) {
+            augmented[col][k] /= pivot_val;
+        }
+
+        // Eliminate other rows
+        for (int row = 0; row < size; row++) {
+            if (row != col && fabs(augmented[row][col]) > EPSILON) {
+                double factor = augmented[row][col];
+                for (int k = col; k < 2 * size; k++) {
+                    augmented[row][k] -= factor * augmented[col][k];
+                }
+            }
+        }
+    }
+    SquareMatrix result;
+    result = *this;
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            result.Matrix[i][j] = augmented[i][j + size];
+        }
+    }
+    for (int i = 0; i < size; i++) delete[] augmented[i];
+    delete[] augmented;
+    return result;
+}
