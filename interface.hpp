@@ -10,8 +10,8 @@ class BaseMatrix{
     BaseMatrix(const BaseMatrix& other);//copy constructor.
     ~BaseMatrix();// temporarily comment this out cause it creates problems until it is fully implemented
     BaseMatrix& operator=(const BaseMatrix& rhs);
-    BaseMatrix operator+(const BaseMatrix& rhs)const;
-    BaseMatrix operator-(const BaseMatrix& rhs)const;
+    BaseMatrix& operator+(const BaseMatrix& rhs);
+    BaseMatrix& operator-(const BaseMatrix& rhs);
     BaseMatrix& operator*(const BaseMatrix& rhs);
     BaseMatrix& operator/(double scalar);
     bool operator==(const BaseMatrix& rhs)
