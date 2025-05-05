@@ -58,7 +58,7 @@ void BaseMatrix::Display(){
         cout<<endl;
     }
 };
-SquareMatrix:: SquareMatrix(int a, int b):BaseMatrix(a,b), size(a){};//constructor for squarematrix.
+SquareMatrix:: SquareMatrix(int a):BaseMatrix(a,a), size(a){};//constructor for squarematrix.
 
 double SquareMatrix:: Determinant(){
     double det = 1.0;
