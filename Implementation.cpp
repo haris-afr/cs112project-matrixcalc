@@ -227,7 +227,8 @@ void SquareMatrix:: Transpose() {
 }
 
 
-BaseMatrix BaseMatrix::operator*(const BaseMatrix& rhs){
+
+BaseMatrix& BaseMatrix::operator*(const BaseMatrix& rhs) {
     if (columns != rhs.rows) {
         throw std::invalid_argument("Matrix dimensions not compatible for multiplication.");
     }
@@ -240,16 +241,38 @@ BaseMatrix BaseMatrix::operator*(const BaseMatrix& rhs){
             }
         }
     }
-    return result;
+    for (int i = 0; i < rows; i++) {
+        delete[] Matrix[i];
+    }
+    delete[] Matrix;
 
-BaseMatrix BaseMatrix::operator/(double scalar){
-    BaseMatrix result(rows, columns);
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < columns; ++j) {
-            result.Matrix[i][j] = Matrix[i][j] / scalar;
+    rows = result.rows;
+    columns = result.columns;
+    Matrix = new double* [rows];
+    for (int i = 0; i < rows; i++) {
+        Matrix[i] = new double[columns];
+        for (int j = 0; j < columns; j++) {
+            Matrix[i][j] = result.Matrix[i][j];
         }
     }
-    return result;
+
+    return *this;
 }
 
 
+
+
+
+BaseMatrix& BaseMatrix::operator/(double scalar) {
+    if (scalar == 0) {
+        throw std::invalid_argument("Division by zero.");
+    }
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            Matrix[i][j] /= scalar;
+        }
+    }
+
+    return *this;
+}
