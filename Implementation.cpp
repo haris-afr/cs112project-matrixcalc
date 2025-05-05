@@ -311,33 +311,33 @@ BaseMatrix& BaseMatrix::operator/(double scalar) {
 
     return *this;
 }
-BaseMatrix BaseMatrix::operator+(const BaseMatrix& rhs) const {
+BaseMatrix& BaseMatrix::operator+(const BaseMatrix& rhs) {
     if (rows != rhs.rows || columns != rhs.columns) {
         throw std::invalid_argument("Matrix dimensions must match for addition.");
     }
 
-    BaseMatrix result(rows, columns);
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
-            result.Matrix[i][j] = Matrix[i][j] + rhs.Matrix[i][j];
+            Matrix[i][j] += rhs.Matrix[i][j];
         }
     }
-    return result;
+    return *this;
 }
 
-BaseMatrix BaseMatrix::operator-(const BaseMatrix& rhs) const {
+
+BaseMatrix& BaseMatrix::operator-(const BaseMatrix& rhs) {
     if (rows != rhs.rows || columns != rhs.columns) {
         throw std::invalid_argument("Matrix dimensions must match for subtraction.");
     }
 
-    BaseMatrix result(rows, columns);
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
-            result.Matrix[i][j] = Matrix[i][j] - rhs.Matrix[i][j];
+            Matrix[i][j] -= rhs.Matrix[i][j];
         }
     }
-    return result;
+    return *this;
 }
+
 
 bool BaseMatrix::operator==(const BaseMatrix& rhs) const {
     if (rows != rhs.rows || columns != rhs.columns) {
