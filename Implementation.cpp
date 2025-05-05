@@ -4,6 +4,15 @@
 #include "interface.hpp"
 
 using namespace std;
+BaseMatrix::BaseMatrix(const BaseMatrix& other) : rows(other.rows), columns(other.columns) { // copy constructor.
+    Matrix = new double*[rows];
+    for (int i = 0; i < rows; i++) {
+        Matrix[i] = new double[columns];
+        for (int j = 0; j < columns; j++) {
+            Matrix[i][j] = other.Matrix[i][j];
+        }
+    }
+}
 BaseMatrix:: BaseMatrix():rows(3), columns(3){// makes a default 3x3 with 1s. can later use assignment operator to change it.
     Matrix = new double*[3];
     for(int i =0; i<3; i++){
