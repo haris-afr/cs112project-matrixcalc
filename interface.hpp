@@ -9,8 +9,8 @@ class BaseMatrix{
     BaseMatrix(int x, int y);
     //~BaseMatrix(); temporarily comment this out cause it creates problems until it is fully implemented
     BaseMatrix& operator=(const BaseMatrix& rhs);
-    BaseMatrix& operator+(const BaseMatrix& rhs);
-    BaseMatrix& operator-(const BaseMatrix& rhs);
+    BaseMatrix operator+(const BaseMatrix& rhs);
+    BaseMatrix operator-(const BaseMatrix& rhs);
     BaseMatrix& operator*(const BaseMatrix& rhs);
     BaseMatrix& operator/(double scalar);
     //virtual void Transpose(); // make the thing equal to matrix in the function itself.
