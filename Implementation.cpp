@@ -225,3 +225,21 @@ void SquareMatrix:: Transpose() {
         }
     }
 }
+
+
+BaseMatrix BaseMatrix::operator*(const BaseMatrix& rhs) const {
+    if (columns != rhs.rows) {
+        throw std::invalid_argument("Matrix dimensions not compatible for multiplication.");
+    }
+    BaseMatrix result(rows, rhs.columns);
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < rhs.columns; ++j) {
+            result.Matrix[i][j] = 0;
+            for (int k = 0; k < columns; ++k) {
+                result.Matrix[i][j] += Matrix[i][k] * rhs.Matrix[k][j];
+            }
+        }
+    }
+    return result;
+
+
