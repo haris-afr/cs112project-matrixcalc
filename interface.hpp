@@ -1,5 +1,5 @@
 #ifndef INTERFACE_HPP
-#define INTEFACE_HPP
+#define INTERFACE_HPP
 class BaseMatrix{
     protected: 
     double** Matrix;
@@ -11,6 +11,7 @@ class BaseMatrix{
     BaseMatrix& operator+(const BaseMatrix& rhs);
     BaseMatrix& operator-(const BaseMatrix& rhs);
     BaseMatrix& operator*(const BaseMatrix& rhs);
+    BaseMatrix& operator/(double scalar);
     //virtual void Transpose(); // make the thing equal to matrix in the function itself.
     void RowEchelon(bool normalize);
     void ReducedRowEchelon();
