@@ -276,3 +276,62 @@ BaseMatrix& BaseMatrix::operator/(double scalar) {
 
     return *this;
 }
+BaseMatrix BaseMatrix::operator+(const BaseMatrix& rhs) const {
+    if (rows != rhs.rows || columns != rhs.columns) {
+        throw std::invalid_argument("Matrix dimensions must match for addition.");
+    }
+
+    BaseMatrix result(rows, columns);
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+            result.Matrix[i][j] = Matrix[i][j] + rhs.Matrix[i][j];
+        }
+    }
+    return result;
+}
+
+BaseMatrix BaseMatrix::operator-(const BaseMatrix& rhs) const {
+    if (rows != rhs.rows || columns != rhs.columns) {
+        throw std::invalid_argument("Matrix dimensions must match for subtraction.");
+    }
+
+    BaseMatrix result(rows, columns);
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+            result.Matrix[i][j] = Matrix[i][j] - rhs.Matrix[i][j];
+        }
+    }
+    return result;
+}
+
+bool BaseMatrix::operator==(const BaseMatrix& rhs) const {
+    if (rows != rhs.rows || columns != rhs.columns) {
+        return false;
+    }
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+            if (Matrix[i][j] != rhs.Matrix[i][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+BaseMatrix::BaseMatrix(const BaseMatrix& other) : rows(other.rows), columns(other.columns) {
+    Matrix = new double*[rows];
+    for (int i = 0; i < rows; ++i) {
+        Matrix[i] = new double[columns];
+        for (int j = 0; j < columns; ++j) {
+            Matrix[i][j] = other.Matrix[i][j];
+        }
+    }
+}
+
+BaseMatrix::~BaseMatrix() {
+    for (int i = 0; i < rows; ++i) {
+        delete[] Matrix[i];
+    }
+    delete[] Matrix;
+}
