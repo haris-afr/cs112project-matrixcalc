@@ -10,8 +10,8 @@ class BaseMatrix{
     BaseMatrix(const BaseMatrix& other);//copy constructor.
     ~BaseMatrix();// temporarily comment this out cause it creates problems until it is fully implemented
     BaseMatrix& operator=(const BaseMatrix& rhs);
-    BaseMatrix operator+(const BaseMatrix& rhs);
-    BaseMatrix operator-(const BaseMatrix& rhs);
+    BaseMatrix operator+(const BaseMatrix& rhs)const;
+    BaseMatrix operator-(const BaseMatrix& rhs)const;
     BaseMatrix& operator*(const BaseMatrix& rhs);
     BaseMatrix& operator/(double scalar);
     bool operator==(const BaseMatrix& rhs)
@@ -38,7 +38,7 @@ class SquareMatrix: public BaseMatrix{
     int size; //will be equal to either rows or columns
     public:
     SquareMatrix();
-    SquareMatrix(int a, int b);
+    SquareMatrix(int a);
     SquareMatrix(const SquareMatrix& other); //copy construcot
     SquareMatrix& operator=(const SquareMatrix& other);
     SquareMatrix Inverse(); // make the thing equal to matrix in function itself.
