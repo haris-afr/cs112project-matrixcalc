@@ -4,8 +4,9 @@ using namespace std;
 
 
 int main(){
-	BaseMatrix test(3, 2);
+	BaseMatrix test(3, 3);
 	test.Display();
-	test.RowEchelon();	
+	test.ReducedRowEchelon();
+	cout << test.Rank() << endl;
 	test.Display();
 }

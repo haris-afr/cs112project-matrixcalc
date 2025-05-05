@@ -12,7 +12,7 @@ class BaseMatrix{
     BaseMatrix& operator-(const BaseMatrix& rhs);
     BaseMatrix& operator*(const BaseMatrix& rhs);
     //virtual void Transpose(); // make the thing equal to matrix in the function itself.
-    void RowEchelon();
+    void RowEchelon(bool normalize);
     void ReducedRowEchelon();
     int Rank();
     void Display();
@@ -26,8 +26,6 @@ class BaseMatrix{
     void getCol(int colNo, double*);
     void swapRows(int row1, int row2);
     void multiplyRow(int row, double coefficient);
-//    void rowMinusRow(int row1, int row2); unneccessary, remove if not used
-//    void rowPlusRow(int row1, int row2);
     void rowPlusRow(int row1, int row2, double multiplier);
 };
 

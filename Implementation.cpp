@@ -108,63 +108,91 @@ void BaseMatrix::multiplyRow(int row, double coefficient){
 		Matrix[row][i] *= coefficient;
 	}
 }
-//
-//void BaseMatrix::rowMinusRow(int row1, int row2){
-//	for (int i = 0; i < columns;i++){
-//		Matrix[row1][i] -= Matrix[row2][i];
-//	}
-//}
-//void BaseMatrix::rowPlusRow(int row1, int row2){
-//	for (int i = 0; i < columns;i++){
-//		Matrix[row1][i] += Matrix[row2][i];
-//	}
-//} 
-///Unneccesary, remove if not used
-void BaseMatrix::rowPlusRow(int row1, int row2, double multiplier){
+
+void BaseMatrix::rowPlusRow(int row1, int row2, double multiplier = 1){
 	for (int i = 0; i < columns;i++){
 		Matrix[row1][i] += Matrix[row2][i] * multiplier;
 	}
 }
 
-void BaseMatrix::RowEchelon(){
-	for (int pivotNum = 0; pivotNum < columns; pivotNum++){
-		int pivotRow, pivotCol = 0;
-		double pivotVal = 0;
-		pivotCol = pivotNum;
-		for (int i = pivotNum; i < rows; i++){
-			if(Matrix[i][pivotCol] != 0){
-				pivotRow = i;
+void BaseMatrix::RowEchelon(bool normalize = 0) {
+    int pivotCol = 0;
+    for (int pivotRow = 0; pivotRow < rows && pivotCol < columns; pivotRow++) {
+        // Find the first row with a non-zero entry in pivotCol
+        int i = pivotRow;
+        while (i < rows && Matrix[i][pivotCol] == 0) {
+            i++;
+        }
+        if (i == rows) { //if i is equal to rows, i.e. we've gone beyond the scope of the matrix...
+            pivotCol++;  // no pivot in this column, go to the next column
+            pivotRow--;  // to off-set pivotRow++ we do pivotRow-- since we want to do the same row again
+            continue;
+        }
+        if (i != pivotRow) {	
+            swapRows(pivotRow, i); 
+        }
+        // If the user asks to normalize, make the pivot = 1
+        if (normalize){
+        multiplyRow(pivotRow, 1.0 / Matrix[pivotRow][pivotCol]);
+    	}
+		// make the below elements = 0
+        for (int row = pivotRow + 1; row < rows; row++) {
+        	if (normalize){
+            rowPlusRow(row, pivotRow, -Matrix[row][pivotCol]);
+            }
+            else{
+            rowPlusRow(row, pivotRow, -Matrix[row][pivotCol]/Matrix[pivotRow][pivotCol]);
+			}
+        }
+        pivotCol++;
+    }
+}
+
+void BaseMatrix::ReducedRowEchelon(){
+	RowEchelon(1);
+	for (int pivotRow=rows-1;pivotRow >= 0;pivotRow--){
+		int column, pivotCol = -1;
+		column = 0;
+		while (true){
+			if (Matrix[pivotRow][column] != 0){
+				pivotCol = column;
 				break;
 			}
-			if (pivotCol >= columns - 1 && i == rows - 1){
-				return;
+			else{
+				column++;
 			}
-			if (i == rows - 1){
-				i = 0;
-				pivotCol++;
+			if (column >= columns){
+				break;
 			}
 		}
-		
-		if (pivotRow != pivotNum){
-			swapRows(pivotNum, pivotRow);
-			pivotRow = pivotNum;
+		if (pivotCol == -1){
+			continue;
 		}
-		
-		pivotVal = Matrix[pivotRow][pivotCol];
-		multiplyRow(pivotRow, 1/pivotVal);
-	
-		for (int row = pivotRow + 1; row < rows; row++){
+		for (int row = pivotRow-1; row>= 0; row--){
 			rowPlusRow(row, pivotRow, -Matrix[row][pivotCol]);
 		}
 	}
 }
-void BaseMatrix::ReducedRowEchelon(){
-	cout << "hi";
-}
 
 int BaseMatrix::Rank(){
-	cout << "hi";	
-	return 0;
+	RowEchelon(0);
+	int zeroRows = rows;
+	int rank = 0;
+	for (int row = 0; row < rows; row++){
+		bool zeroRow = 1;
+		for (int column = 0; column < columns; column++){
+			if (Matrix[row][column] != 0){
+				zeroRow = 0;
+				break;
+			}
+		}
+		if (zeroRow == 0){
+			zeroRows--;
+			continue;
+		}
+	}
+	rank = rows - zeroRows;
+	return rank;
 }
 
 BaseMatrix& BaseMatrix:: operator=(const BaseMatrix& rhs){
