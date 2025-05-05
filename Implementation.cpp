@@ -227,7 +227,7 @@ void SquareMatrix:: Transpose() {
 }
 
 
-BaseMatrix BaseMatrix::operator*(const BaseMatrix& rhs) const {
+BaseMatrix BaseMatrix::operator*(const BaseMatrix& rhs){
     if (columns != rhs.rows) {
         throw std::invalid_argument("Matrix dimensions not compatible for multiplication.");
     }
@@ -242,7 +242,7 @@ BaseMatrix BaseMatrix::operator*(const BaseMatrix& rhs) const {
     }
     return result;
 
-BaseMatrix BaseMatrix::operator/(double scalar) const {
+BaseMatrix BaseMatrix::operator/(double scalar){
     BaseMatrix result(rows, columns);
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < columns; ++j) {
