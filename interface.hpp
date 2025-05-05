@@ -8,7 +8,7 @@ class BaseMatrix{
     BaseMatrix();
     BaseMatrix(int x, int y);
     BaseMatrix(const BaseMatrix& other);//copy constructor.
-    //~BaseMatrix(); temporarily comment this out cause it creates problems until it is fully implemented
+    ~BaseMatrix();// temporarily comment this out cause it creates problems until it is fully implemented
     BaseMatrix& operator=(const BaseMatrix& rhs);
     BaseMatrix operator+(const BaseMatrix& rhs);
     BaseMatrix operator-(const BaseMatrix& rhs);
