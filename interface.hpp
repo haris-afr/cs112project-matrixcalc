@@ -7,13 +7,14 @@ class BaseMatrix{
     public:
     BaseMatrix();
     BaseMatrix(int x, int y);
+    BaseMatrix(const BaseMatrix& other);//copy constructor.
     //~BaseMatrix(); temporarily comment this out cause it creates problems until it is fully implemented
     BaseMatrix& operator=(const BaseMatrix& rhs);
     BaseMatrix operator+(const BaseMatrix& rhs);
     BaseMatrix operator-(const BaseMatrix& rhs);
     BaseMatrix& operator*(const BaseMatrix& rhs);
     BaseMatrix& operator/(double scalar);
-    bool BaseMatrix::operator==(const BaseMatrix& rhs)
+    bool operator==(const BaseMatrix& rhs)
     //virtual void Transpose(); // make the thing equal to matrix in the function itself.
     void RowEchelon(bool normalize);
     void ReducedRowEchelon();
@@ -38,6 +39,8 @@ class SquareMatrix: public BaseMatrix{
     public:
     SquareMatrix();
     SquareMatrix(int a, int b);
+    SquareMatrix(const SquareMatrix& other); //copy construcot
+    SquareMatrix& operator=(const SquareMatrix& other);
     SquareMatrix Inverse(); // make the thing equal to matrix in function itself.
     double Determinant();
     SquareMatrix Transpose();
