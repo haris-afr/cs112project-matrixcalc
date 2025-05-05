@@ -419,3 +419,10 @@ SquareMatrix SquareMatrix::Inverse() {
     delete[] augmented;
     return result;
 }
+
+BaseMatrix:: ~BaseMatrix(){
+    for(int i=0; i<rows; i++){
+        delete[] Matrix[i];
+    }
+    delete[] Matrix;
+}
