@@ -131,7 +131,7 @@ void BaseMatrix::swapRows(int row1, int row2){
 		getRow(row1, tempRow);
 		setRow(row1, Matrix[row2]);
 		setRow(row2, tempRow);
-		delete tempRow;
+		delete[] tempRow;
 }
 
 void BaseMatrix::multiplyRow(int row, double coefficient){
@@ -339,7 +339,7 @@ BaseMatrix& BaseMatrix::operator-(const BaseMatrix& rhs) {
 }
 
 
-bool BaseMatrix::operator==(const BaseMatrix& rhs) const {
+bool BaseMatrix::operator==(const BaseMatrix& rhs){
     if (rows != rhs.rows || columns != rhs.columns) {
         return false;
     }
