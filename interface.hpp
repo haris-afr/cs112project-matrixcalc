@@ -1,5 +1,5 @@
 #ifndef INTERFACE_HPP
-#define INTEFACE_HPP
+#define INTERFACE_HPP
 class BaseMatrix{
     protected: 
     double** Matrix;
