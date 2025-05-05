@@ -319,19 +319,3 @@ bool BaseMatrix::operator==(const BaseMatrix& rhs) const {
     return true;
 }
 
-BaseMatrix::BaseMatrix(const BaseMatrix& other) : rows(other.rows), columns(other.columns) {
-    Matrix = new double*[rows];
-    for (int i = 0; i < rows; ++i) {
-        Matrix[i] = new double[columns];
-        for (int j = 0; j < columns; ++j) {
-            Matrix[i][j] = other.Matrix[i][j];
-        }
-    }
-}
-
-BaseMatrix::~BaseMatrix() {
-    for (int i = 0; i < rows; ++i) {
-        delete[] Matrix[i];
-    }
-    delete[] Matrix;
-}
