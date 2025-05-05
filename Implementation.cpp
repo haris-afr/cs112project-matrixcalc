@@ -25,6 +25,15 @@ BaseMatrix:: BaseMatrix():rows(3), columns(3){// makes a default 3x3 with 1s. ca
     }
 }
 SquareMatrix:: SquareMatrix():BaseMatrix(), size(3){}// makes a default 3x3 with 1s
+SquareMatrix::SquareMatrix(const SquareMatrix& other) : BaseMatrix(other),size(other.size){};// copy constructor.
+
+SquareMatrix& SquareMatrix::operator=(const SquareMatrix& other) { // copy assignment operator.
+    if (this != &other) {  
+        BaseMatrix::operator=(other);  
+        size = other.size;    
+    }     
+    return *this;
+}
 
 BaseMatrix::BaseMatrix(int x, int y): rows(x), columns(y) {
     Matrix = new double*[x];
