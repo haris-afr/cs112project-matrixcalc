@@ -96,19 +96,19 @@ double SquareMatrix:: Determinant(){
 }
 
 void BaseMatrix::setRow(int rowNo, double* newRow, BaseMatrix& givenMatrix){
-	for (int i = 0; i < columns; i++){
+	for (int i = 0; i < givenMatrix.columns; i++){
 		givenMatrix.Matrix[rowNo][i] = newRow[i];
 	}
 }
 
 void BaseMatrix::getRow(int rowNo, double* rowArray, BaseMatrix& givenMatrix){
-	for (int i = 0; i < columns; i++){
+	for (int i = 0; i < givenMatrix.columns; i++){
 		rowArray[i] = givenMatrix.Matrix[rowNo][i];
 	}
 }
 
 void BaseMatrix::swapRows(int row1, int row2, BaseMatrix& givenMatrix){
-		double *tempRow = new double [columns];
+		double *tempRow = new double [givenMatrix.columns];
 		getRow(row1, tempRow, givenMatrix);
 		setRow(row1, givenMatrix.Matrix[row2], givenMatrix);
 		setRow(row2, tempRow, givenMatrix);
@@ -116,13 +116,13 @@ void BaseMatrix::swapRows(int row1, int row2, BaseMatrix& givenMatrix){
 }
 
 void BaseMatrix::multiplyRow(int row, double coefficient, BaseMatrix& givenMatrix){
-	for (int i = 0; i < columns; i++){
+	for (int i = 0; i < givenMatrix.columns; i++){
 		givenMatrix.Matrix[row][i] *= coefficient;
 	}
 }
 
 void BaseMatrix::rowPlusRow(int row1, int row2, BaseMatrix& givenMatrix, double multiplier = 1){
-	for (int i = 0; i < columns;i++){
+	for (int i = 0; i < givenMatrix.columns;i++){
 		givenMatrix.Matrix[row1][i] += givenMatrix.Matrix[row2][i] * multiplier;
 	}
 }
@@ -155,7 +155,7 @@ BaseMatrix BaseMatrix::RowEchelon(bool normalize = 0) {
             rowPlusRow(row, pivotRow, result, -result.Matrix[row][pivotCol]);
             }
             else{
-            rowPlusRow(row, pivotRow, result, -result.Matrix[row][pivotCol]/Matrix[pivotRow][pivotCol]);
+            rowPlusRow(row, pivotRow, result, -result.Matrix[row][pivotCol]/result.Matrix[pivotRow][pivotCol]);
 			}
         }
         pivotCol++;
@@ -200,7 +200,7 @@ int BaseMatrix::Rank(){
 	for (int row = 0; row < result.rows; row++){
 		bool zeroRow = 1;
 		for (int column = 0; column < result.columns; column++){
-			if (Matrix[row][column] != 0){
+			if (result.Matrix[row][column] != 0){
 				zeroRow = 0;
 				break;
 			}
