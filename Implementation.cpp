@@ -450,5 +450,31 @@ void BaseMatrix:: ChangeMatrix(){
 }
 
     
+void SquareMatrix:: ChangeMatrix(){
+    for(int i =0; i<rows; i++){
+        delete[] Matrix[i];
+    }
+    delete[] Matrix;
+
+    cout<<"please enter number of rows: ";
+    cin>>rows;
+    columns = rows;
+    size = rows;
+
+    Matrix = new double*[rows];
+    for(int i =0; i<rows; i++){
+        Matrix[i]= new double[columns];
+    }
+    for(int i=0; i<rows; i++){
+        for(int j=0; j<columns; j++){
+        double temp;
+        cout<<"Please enter "<<i<<"'"<<j<<"th element: ";
+        cin>>temp;
+        Matrix[i][j]= temp;
+        }
+    }
+}
+
+    
 
 
