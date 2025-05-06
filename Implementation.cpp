@@ -263,7 +263,7 @@ SquareMatrix SquareMatrix:: Transpose() {
 
 
 
-BaseMatrix& BaseMatrix::operator*(const BaseMatrix& rhs) {
+BaseMatrix BaseMatrix::operator*(const BaseMatrix& rhs) {
     if (columns != rhs.rows) {
         throw std::invalid_argument("Matrix dimensions not compatible for multiplication.");
     }
@@ -273,7 +273,7 @@ BaseMatrix& BaseMatrix::operator*(const BaseMatrix& rhs) {
         for (int j = 0; j < rhs.columns; ++j) {
             result.Matrix[i][j] = 0;
             for (int k = 0; k < columns; ++k) {
-                result.Matrix[i][j] += Matrix[i][k] * rhs.Matrix[k][j];
+                result.Matrix[i][j] = Matrix[i][k] * rhs.Matrix[k][j];
             }
         }
     }
@@ -282,17 +282,7 @@ BaseMatrix& BaseMatrix::operator*(const BaseMatrix& rhs) {
     }
     delete[] Matrix;
 
-    rows = result.rows;
-    columns = result.columns;
-    Matrix = new double* [rows];
-    for (int i = 0; i < rows; i++) {
-        Matrix[i] = new double[columns];
-        for (int j = 0; j < columns; j++) {
-            Matrix[i][j] = result.Matrix[i][j];
-        }
-    }
-
-    return *this;
+    return result;
 }
 
 
@@ -312,31 +302,35 @@ BaseMatrix& BaseMatrix::operator/(double scalar) {
 
     return *this;
 }
-BaseMatrix& BaseMatrix::operator+(const BaseMatrix& rhs) {
+BaseMatrix BaseMatrix::operator+(const BaseMatrix& rhs) {
+    BaseMatrix result;
+    result = *this;
     if (rows != rhs.rows || columns != rhs.columns) {
         throw std::invalid_argument("Matrix dimensions must match for addition.");
     }
 
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
-            Matrix[i][j] += rhs.Matrix[i][j];
+             result.Matrix[i][j]= Matrix[i][j] + rhs.Matrix[i][j];
         }
     }
-    return *this;
+    return result;
 }
 
 
-BaseMatrix& BaseMatrix::operator-(const BaseMatrix& rhs) {
+BaseMatrix BaseMatrix::operator-(const BaseMatrix& rhs) {
+    BaseMatrix result;
+    result = *this;
     if (rows != rhs.rows || columns != rhs.columns) {
-        throw std::invalid_argument("Matrix dimensions must match for subtraction.");
+        throw std::invalid_argument("Matrix dimensions must match for addition.");
     }
 
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
-            Matrix[i][j] -= rhs.Matrix[i][j];
+             result.Matrix[i][j]= Matrix[i][j] - rhs.Matrix[i][j];
         }
     }
-    return *this;
+    return result;
 }
 
 

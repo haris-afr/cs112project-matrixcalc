@@ -10,9 +10,9 @@ class BaseMatrix{
     BaseMatrix(const BaseMatrix& other);//copy constructor.
     ~BaseMatrix();
     BaseMatrix& operator=(const BaseMatrix& rhs);
-    BaseMatrix& operator+(const BaseMatrix& rhs);
-    BaseMatrix& operator-(const BaseMatrix& rhs);
-    BaseMatrix& operator*(const BaseMatrix& rhs);
+    BaseMatrix operator+(const BaseMatrix& rhs);
+    BaseMatrix operator-(const BaseMatrix& rhs);
+    BaseMatrix operator*(const BaseMatrix& rhs);
     BaseMatrix& operator/(double scalar);
     bool operator==(const BaseMatrix& rhs);
     //virtual void Transpose(); // make the thing equal to matrix in the function itself.
