@@ -45,9 +45,5 @@ class SquareMatrix: public BaseMatrix{
     double Determinant();
     SquareMatrix Transpose();
 };
-class IdentityMatrix: public SquareMatrix{
-	IdentityMatrix(int rows); //TODO
-	double Determinant();	  //TODO
-};
 
 #endif
