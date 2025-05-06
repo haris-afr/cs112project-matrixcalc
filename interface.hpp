@@ -44,6 +44,7 @@ class SquareMatrix: public BaseMatrix{
     SquareMatrix Inverse(); // make the thing equal to matrix in function itself.
     double Determinant();
     SquareMatrix Transpose();
+    void ChangeMatrix() override;
 };
 
 #endif
