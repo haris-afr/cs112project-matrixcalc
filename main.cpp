@@ -25,6 +25,7 @@ void showMainMenu() {
 int main(){
 	BaseMatrix A, B;
     SquareMatrix S;
+    BaseMatrix result;
     int choice;
     bool running = true;
 
@@ -92,14 +93,15 @@ int main(){
                 cout << (A == B ? "\nA and B are equal.\n" : "\nA and B are NOT equal.\n");
                 break;
             case 9:
+            	
                 cout << "\nRow Echelon Form of A:\n";
-                A.RowEchelon(false);
-                A.Display();
+                result = A.RowEchelon(false);
+                result.Display();
                 break;
             case 10:
                 cout << "\nReduced Row Echelon Form of A:\n";
-                A.ReducedRowEchelon();
-                A.Display();
+                result = A.ReducedRowEchelon();
+                result.Display();
                 break;
             case 11:
                 cout << "\nRank of A: " << A.Rank() << endl;

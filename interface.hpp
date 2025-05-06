@@ -16,21 +16,17 @@ class BaseMatrix{
     BaseMatrix operator/(double scalar);
     bool operator==(const BaseMatrix& rhs);
     //virtual void Transpose(); // make the thing equal to matrix in the function itself.
-    void RowEchelon(bool normalize);
-    void ReducedRowEchelon();
+    BaseMatrix RowEchelon(bool normalize);
+    BaseMatrix ReducedRowEchelon();
     int Rank();
     void Display();
     virtual void ChangeMatrix();
     
-    void displayRow(int rowNo);
-    void displayCol(int colNo);
-    void setRow(int rowNo, double* newRow);
-    void setCol(int colNo, double* newCol);
-    void getRow(int rowNo, double*);
-    void getCol(int colNo, double*);
-    void swapRows(int row1, int row2);
-    void multiplyRow(int row, double coefficient);
-    void rowPlusRow(int row1, int row2, double multiplier);
+    void setRow(int rowNo, double* newRow, BaseMatrix& givenMatrix);
+    void getRow(int rowNo, double*, BaseMatrix& givenMatrix);
+    void swapRows(int row1, int row2, BaseMatrix& givenMatrix);
+    void multiplyRow(int row, double coefficient, BaseMatrix& givenMatrix);
+    void rowPlusRow(int row1, int row2, BaseMatrix& givenMatrix, double multiplier);
 };
 
 class SquareMatrix: public BaseMatrix{
