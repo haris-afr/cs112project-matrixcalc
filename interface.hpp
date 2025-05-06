@@ -20,7 +20,7 @@ class BaseMatrix{
     void ReducedRowEchelon();
     int Rank();
     void Display();
-    int ChangeMatrix();
+    void ChangeMatrix();
     
     void displayRow(int rowNo);
     void displayCol(int colNo);
