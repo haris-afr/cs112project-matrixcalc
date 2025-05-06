@@ -267,7 +267,8 @@ BaseMatrix& BaseMatrix::operator*(const BaseMatrix& rhs) {
     if (columns != rhs.rows) {
         throw std::invalid_argument("Matrix dimensions not compatible for multiplication.");
     }
-    BaseMatrix result(rows, rhs.columns);
+    BaseMatrix result;
+    result = *this;
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < rhs.columns; ++j) {
             result.Matrix[i][j] = 0;
