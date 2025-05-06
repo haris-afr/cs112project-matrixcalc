@@ -64,6 +64,9 @@ double SquareMatrix:: Determinant(){
     double det = 1.0;
     SquareMatrix temp(*this);
     //need to find the pivot which will be the largest value in the column.
+    if (rows == 1){
+    	return 1;
+	}
     for(int i=0; i<size; i++){
         int pivot =i;
         for(int j=i+1; j<size; j++){
