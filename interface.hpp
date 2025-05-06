@@ -46,8 +46,8 @@ class SquareMatrix: public BaseMatrix{
     SquareMatrix Transpose();
 };
 class IdentityMatrix: public SquareMatrix{
-	IdentityMatrix(int rows);
-	double Determinant();	
+	IdentityMatrix(int rows); //TODO
+	double Determinant();	  //TODO
 };
 
 #endif
