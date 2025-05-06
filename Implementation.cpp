@@ -426,3 +426,32 @@ BaseMatrix:: ~BaseMatrix(){
     }
     delete[] Matrix;
 }
+
+void BaseMatrix:: ChangeMatrix(){
+    for(int i =0; i<rows; i++){
+        delete[] Matrix[i];
+    }
+    delete[] Matrix;
+
+    cout<<"please enter number of rows: ";
+    cin>>rows;
+    cout<<"please enter number of columns: ";
+    cin>>columns;
+
+    Matrix = new double*[rows];
+    for(int i =0; i<rows; i++){
+        Matrix[i]= new double[columns];
+    }
+    for(int i=0; i<rows; i++){
+        for(int j=0; j<columns; j++){
+        double temp;
+        cout<<"Please enter "<<i<<"'"<<j<<"th element: ";
+        cin>>temp;
+        Matrix[i][j]= temp;
+        }
+    }
+}
+
+    
+
+
