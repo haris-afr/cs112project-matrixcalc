@@ -289,18 +289,20 @@ BaseMatrix BaseMatrix::operator*(const BaseMatrix& rhs) {
 
 
 
-BaseMatrix& BaseMatrix::operator/(double scalar) {
+BaseMatrix BaseMatrix::operator/(double scalar) {
+    
     if (scalar == 0) {
         throw std::invalid_argument("Division by zero.");
     }
-
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < columns; ++j) {
-            Matrix[i][j] /= scalar;
+    BaseMatrix result;
+    result = *this;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+            result.Matrix[i][j] = Matrix[i][j]/scalar;
         }
     }
 
-    return *this;
+    return result;
 }
 BaseMatrix BaseMatrix::operator+(const BaseMatrix& rhs) {
     BaseMatrix result;
