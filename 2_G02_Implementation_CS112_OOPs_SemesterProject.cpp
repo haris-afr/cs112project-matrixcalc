@@ -340,7 +340,6 @@ bool BaseMatrix::operator==(const BaseMatrix& rhs){
 }
 
 SquareMatrix SquareMatrix::Inverse() {
-    const double EPSILON = 1e-10; // using this for floating point precision.
     
     // Create augmented matrix [Matrix|I]
     double** augmented = new double*[size];
